@@ -1,7 +1,8 @@
-const {test, expect} = require('@playwright/test');
+const { test, expect } = require('@playwright/test');
 
-test('Client App', async ({page})=>
-{
+test.only('Client App', async ({ page }) => {
+    const productName = "adidas original";
+    const products = page.locator(".card-body");
     await page.goto("https://rahulshettyacademy.com/client");
     await page.locator("[type='email']").fill("thai@gmail.com");
     await page.locator("[type='password']").fill("4Youonly4");
@@ -10,7 +11,13 @@ test('Client App', async ({page})=>
 
     await page.locator(".card-body b").first().waitFor();
     const titles = await page.locator(".card-body b").allTextContents();
-    
     console.log(titles);
-
+    const count = await products.count();
+    for (let i = 0; i < count; i++) {
+        if (await products.nth(i).locator("b").textContent() === productName) {
+            await products.nth(i).locator("text= Add To Cart").click();
+            break;
+        }
+    }
+await page.pause();
 })
