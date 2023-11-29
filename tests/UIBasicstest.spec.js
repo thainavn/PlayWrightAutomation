@@ -28,7 +28,7 @@ test('Browser Context Playwright test', async ({browser})=>
 });
 
 
-test.only('UI Controls', async ({page})=>
+test('UI Controls', async ({page})=>
 {
      await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
      const userName = page.locator('#username');
@@ -48,7 +48,7 @@ test.only('UI Controls', async ({page})=>
      // await page.pause();
 });
 
-test('Child windows handle', async ({browser})=>
+test.only('Child windows handle', async ({browser})=>
 {
      const context = await browser.newContext();
      const page = await context.newPage();
