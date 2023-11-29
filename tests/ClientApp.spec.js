@@ -19,5 +19,24 @@ test.only('Client App', async ({ page }) => {
             break;
         }
     }
-await page.pause();
+    await page.locator("[routerlink*='cart']").click();
+    await page.locator("div li").first().waitFor();
+    const bool = await page.locator("h3:has-text('adidas original')").isVisible();
+    expect(bool).toBeTruthy();
+    await page.locator("text=Checkout").click();
+    await page.locator("[placeholder*='Country']").pressSequentially("ind");
+    const dropdown = await page.locator(".ta-results");
+    await dropdown.waitFor();
+    const optionsCount = await dropdown.locator("button").count();
+    for (let i = 0; i < optionsCount; ++i) {
+        const text = await dropdown.locator("button").nth(i).textContent();
+        if (text.trim() === "India") {
+            await dropdown.locator("button").nth(i).click();
+            break;
+        }
+    }
+    await page.pause();
+
+
+
 })
