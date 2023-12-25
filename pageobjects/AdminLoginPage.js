@@ -4,16 +4,18 @@ class AdminLoginPage {
         this.signInButton = page.locator("[type='submit']");
         this.userName = page.locator("[name='username']");
         this.passWord = page.locator("[name='password']");
+        this.successLoginMsg = page.locator(".Toastify__toast-body");
     }
-    async goTo(){
-        await this.page.goto("https://admin-dev.appigv.vmo.group/log_in");
+    async goTo(baseURL){
+        await this.page.goto(baseURL);
     }
-    async validLogin(userName, passWord) {
+    async login(userName, passWord) {
         await this.userName.type(userName);
         await this.passWord.type(passWord);
         await this.signInButton.click();
-
-
+    }
+    async waitForLoginSuccess(){
+        await this.page.waitForLoadState('networkidle');
     }
 }
 module.exports = {AdminLoginPage};

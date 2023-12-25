@@ -8,7 +8,7 @@ const config = {
   reporter: 'html',
   use: {
 
-
+    baseURL : 'https://admin-dev.appigv.vmo.group/',
     browserName : 'chromium',
     headless : false,
     screenshot : 'on',
