@@ -4,7 +4,6 @@ class AdminLoginPage {
         this.signInButton = page.locator("[type='submit']");
         this.userName = page.locator("[name='username']");
         this.passWord = page.locator("[name='password']");
-        this.successLoginMsg = page.locator(".Toastify__toast-body");
     }
     async goTo(baseURL){
         await this.page.goto(baseURL);

@@ -1,4 +1,6 @@
 export const LoginUtils = {
-    USERNAME: "super_admin",
-    PASSWORD: "Admin@123"
+    ADMIN_USERNAME: "super_admin",
+    ADMIN_PASSWORD: "Admin@123",
+    WEB_USERNAME: "trainingonjobvmo@gmail.com",
+    WEB_PASSWORD: "Admin123."
 };
