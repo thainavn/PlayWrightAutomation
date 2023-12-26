@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-const { LoginUtils } = require('./utils/DataUtils');
+const { DataUtils } = require('./utils/DataUtils');
 const { baseURL, webBaseURL } = require('../playwright.config');
 const { AdminLoginPage } = require('../pageobjects/Admin/AdminLoginPage');
 const { AdminHomePage } = require('../pageobjects/Admin/AdminHomePage');
@@ -8,31 +8,31 @@ const { QuanLyNhomCauHoiPage } = require('../pageobjects/Admin/QuanLyNhomCauHoiP
 test('LoginAdmin', async ({ page }) => {
     const adminLoginPage = new AdminLoginPage(page);
     await adminLoginPage.goTo(baseURL);
-    await adminLoginPage.login(LoginUtils.ADMIN_USERNAME, LoginUtils.ADMIN_PASSWORD);
+    await adminLoginPage.login(DataUtils.ADMIN_USERNAME, DataUtils.ADMIN_PASSWORD);
     await adminLoginPage.waitForLoginSuccess();
     const adminHomePage = new AdminHomePage(page);
-    await expect(adminHomePage.verifyLoginSuccess()).toBeTruthy();
-    await expect(adminHomePage.verifyOnHomePage()).toBeTruthy();
+    expect(adminHomePage.verifyLoginSuccess()).toBeTruthy();
+    expect(adminHomePage.verifyOnHomePage()).toBeTruthy();
 })
 
 test('LoginWebApp', async ({ page }) => {
     const webHomePage = new WebHomePage(page);
     await webHomePage.goTo(webBaseURL);
     await webHomePage.openLoginPopup();
-    await webHomePage.login(LoginUtils.WEB_USERNAME, LoginUtils.WEB_PASSWORD);
+    await webHomePage.login(DataUtils.WEB_USERNAME, DataUtils.WEB_PASSWORD);
     await webHomePage.waitForLoginSuccess();
-    await expect(webHomePage.verifyLoginSuccess()).toBeTruthy();
+    expect(webHomePage.verifyLoginSuccess()).toBeTruthy();
 
 })
 
-test.only('TaoMoiNhomCauHoi', async ({ page }) => {
+test('TaoMoiNhomCauHoi', async ({ page }) => {
     const adminLoginPage = new AdminLoginPage(page);
     await adminLoginPage.goTo(baseURL);
-    await adminLoginPage.login(LoginUtils.ADMIN_USERNAME, LoginUtils.ADMIN_PASSWORD);
+    await adminLoginPage.login(DataUtils.ADMIN_USERNAME, DataUtils.ADMIN_PASSWORD);
     await adminLoginPage.waitForLoginSuccess();
     const adminHomePage = new AdminHomePage(page);
-    await expect(adminHomePage.verifyLoginSuccess()).toBeTruthy();
-    await expect(adminHomePage.verifyOnHomePage()).toBeTruthy();
+    expect(adminHomePage.verifyLoginSuccess()).toBeTruthy();
+    expect(adminHomePage.verifyOnHomePage()).toBeTruthy();
     await adminHomePage.clickQuanLyNganHangCauHoi();
     await adminHomePage.clickQuanLyNhomCauHoi();
     const quanLyNhomCauHoiPage = new QuanLyNhomCauHoiPage(page);
