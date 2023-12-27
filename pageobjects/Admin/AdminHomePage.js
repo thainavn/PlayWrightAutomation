@@ -18,5 +18,6 @@ class AdminHomePage {
     async clickQuanLyNhomCauHoi() {
         await this.quanLyNhomCauHoiBtn.click();
     }
+    
 }
 module.exports = { AdminHomePage };
