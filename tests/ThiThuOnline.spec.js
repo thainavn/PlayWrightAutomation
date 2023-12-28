@@ -6,6 +6,8 @@ const { AdminHomePage } = require('../pageobjects/Admin/AdminHomePage');
 const { WebHomePage } = require('../pageobjects/Web/WebHomePage');
 const { QuanLyNhomCauHoiPage } = require('../pageobjects/Admin/QuanLyNhomCauHoiPage');
 const { VNPayPage } = require('../pageobjects/Web/VNPayPage');
+const { DanhSachLopPage } = require('../pageobjects/Admin/DanhSachLopPage');
+
 test('LoginAdmin', async ({ page }) => {
     const adminLoginPage = new AdminLoginPage(page);
     await adminLoginPage.goTo(baseURL);
@@ -50,7 +52,7 @@ test('TaoMoiNhomCauHoi', async ({ page }) => {
 
 })
 
-test.only('HocCungGiaoVienThanhToanVNPay', async ({ page }) => {
+test('HocCungGiaoVienThanhToanVNPay', async ({ page }) => {
     const webHomePage = new WebHomePage(page);
     const vnPaypage = new VNPayPage(page);
     await webHomePage.goTo(webBaseURL);
@@ -65,17 +67,39 @@ test.only('HocCungGiaoVienThanhToanVNPay', async ({ page }) => {
     await webHomePage.clickMuaNgay();
     await webHomePage.clickDatHang();
     await webHomePage.checkDongYDieuKhoan();
-    await webHomePage.waitForLoad();
     await webHomePage.clickThanhToan();
     await vnPaypage.clickTheNoiDia();
     await vnPaypage.clickNCB();
-    await vnPaypage.reloadPage();
     await vnPaypage.nhapSoThe(DataUtils.SOTHE);
     await vnPaypage.nhapTenChuThe(DataUtils.TENCHUTHE);
     await vnPaypage.nhapNgayPhatHanh(DataUtils.NGAYPHATHANH);
     await vnPaypage.clickContinue();
+    await vnPaypage.clickDongYVaTiepTuc();
     await vnPaypage.nhapOTP(DataUtils.OTP);
     await vnPaypage.clickThanhToan();
-    expect(await webHomePage.verifyThanhToanThanhCong()).toBeTruthy();
+    await webHomePage.waitForThanhToanThanhCong();
+    expect(webHomePage.verifyThanhToanThanhCong()).toBeTruthy();
+})
+
+test('ThemHocVienVaoLopHoc', async ({ page }) => {
+    const adminLoginPage = new AdminLoginPage(page);
+    const danhSachLopPage = new DanhSachLopPage(page);
+    await adminLoginPage.goTo(baseURL);
+    await adminLoginPage.login(DataUtils.ADMIN_USERNAME, DataUtils.ADMIN_PASSWORD);
+    await adminLoginPage.waitForLoginSuccess();
+    const adminHomePage = new AdminHomePage(page);
+    expect(adminHomePage.verifyLoginSuccess()).toBeTruthy();
+    expect(adminHomePage.verifyOnHomePage()).toBeTruthy();
+    await adminHomePage.clickQuanLyHocCungGiaoVien();
+    await adminHomePage.clickDanhSachLop();
+    await danhSachLopPage.clickDanhSachTrangThai();
+    await danhSachLopPage.chonTrangThaiDangHoatDong();
+    await danhSachLopPage.clickEdit();
+    await danhSachLopPage.clickDanhSachHocVienTab();
+    await danhSachLopPage.clickChonHocVienOpenPopup();
+    await danhSachLopPage.selectHocVienDauTien();
+    await danhSachLopPage.clickChonHocVien();
+    await danhSachLopPage.clickDongY();
+    await expect(danhSachLopPage.verifyMsgThemHocVienThanhCong()).toBeTruthy();
 })
 

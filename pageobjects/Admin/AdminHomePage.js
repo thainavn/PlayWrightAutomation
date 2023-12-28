@@ -5,6 +5,8 @@ class AdminHomePage {
         this.homePageLogo = page.locator("[class='sc-QzmmP ihppzK']");
         this.quanLyNganHangCauHoiBtn = page.locator("ul:nth-child(1) li:nth-child(1) button:nth-child(1) span:nth-child(3)");
         this.quanLyNhomCauHoiBtn = page.locator("[href='/questions_group_management']");
+        this.quanLyHocCungGiaoVienBtn = page.locator("//span[text()='Quản lý học cùng giáo viên']");
+        this.danhSachLopBtn = page.locator("//span[text()='Danh sách lớp']");
     }
     async verifyLoginSuccess() {
         await this.successLoginMsg.isVisible();
@@ -17,6 +19,12 @@ class AdminHomePage {
     }
     async clickQuanLyNhomCauHoi() {
         await this.quanLyNhomCauHoiBtn.click();
+    }
+    async clickQuanLyHocCungGiaoVien() {
+        await this.quanLyHocCungGiaoVienBtn.click();
+    }
+    async clickDanhSachLop() {
+        await this.danhSachLopBtn.click();
     }
     
 }

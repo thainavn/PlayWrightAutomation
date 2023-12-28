@@ -45,24 +45,27 @@ class WebHomePage {
     async viewKhoaHoc() {
         await this.viewKhoaHocBtn.click();
     }
-    async clickMuaNgay(){
+    async clickMuaNgay() {
         await this.muaNgayBtn.click();
     }
-    async clickDatHang(){
+    async clickDatHang() {
         await this.datHangBtn.click();
     }
-    async checkDongYDieuKhoan(){
+    async checkDongYDieuKhoan() {
         await this.dongYDieuKhoanCheckbox.click();
     }
-    async clickThanhToan(){
-        await this.thanhToanBtn.click();
+    async clickThanhToan() {
+        await this.thanhToanBtn.dispatchEvent("click");
     }
     async waitForLoad() {
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(3000);
+    }
+    async waitForThanhToanThanhCong() {
+        await this.page.waitForSelector("//h1[contains(text(),'Thanh toán thành công')]", { state: 'visible' });
     }
     async verifyThanhToanThanhCong() {
         await this.thanhToanThanhCongText.isVisible();
     }
-    
+
 }
 module.exports = { WebHomePage };

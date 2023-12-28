@@ -6,7 +6,8 @@ class VNPayPage {
         this.cardNumberField = page.locator("//input[@type='digits']");
         this.cardHolderField = page.locator("//input[@name='cardHolder']");
         this.cardIssueField = page.locator("//input[@name='cardDate']");
-        this.continueBtn = page.locator("//button[@id='btnContinue']");
+        this.continueBtn = page.locator("//a[@id='btnContinue']");
+        this.dongYVaTiepTucBtn = page.locator("//span[text()='Đồng ý & Tiếp tục']");
         this.otpField = page.locator("//input[@name='otpvalue']");
         this.thanhToanBtn = page.locator("//button[@id='btnConfirm']");
 
@@ -28,6 +29,9 @@ class VNPayPage {
     }
     async clickContinue() {
         await this.continueBtn.click();
+    }
+    async clickDongYVaTiepTuc() {
+        await this.dongYVaTiepTucBtn.click();
     }
     async nhapOTP(otp) {
         await this.otpField.type(otp);
