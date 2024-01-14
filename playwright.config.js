@@ -1,7 +1,7 @@
 const { devices } = require('@playwright/test');
 const config = {
   testDir: './tests',
-  timeout: 40 * 1000,
+  timeout: 30 * 1000,
   baseURL: 'https://admin-dev.appigv.vmo.group/',
   webBaseURL: 'https://web-dev.appigv.vmo.group/',
   expect: {
@@ -15,10 +15,7 @@ const config = {
     browserName: 'chromium',
     headless: false,
     screenshot: 'on',
-    trace: 'retain-on-failure'
-
-
-
+    trace: 'on'
   },
 };
 module.exports = config;

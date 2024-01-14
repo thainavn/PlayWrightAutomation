@@ -1,15 +1,27 @@
+//Login UI -> .json
+//test browser -> .json ,  cart , order , order details , 
 const { test, expect } = require('@playwright/test');
+let webContext;
 
-test('Client App', async ({ page }) => {
-    const productName = "ADIDAS ORIGINAL";
-    const products = page.locator(".card-body");
-    const email = "thai@gmail.com";
+test.beforeAll(async ({ browser }) => {
+    const context = await browser.newContext();
+    const page = await context.newPage();
     await page.goto("https://rahulshettyacademy.com/client");
-    await page.locator("[type='email']").fill(email);
+    await page.locator("[type='email']").fill("thai@gmail.com");
     await page.locator("[type='password']").fill("4Youonly4");
     await page.locator("[type='submit']").click();
     // await page.waitForLoadState('networkidle');
     await page.locator(".card-body b").first().waitFor();
+    await context.storageState({ path: 'state.json' });
+    webContext = await browser.newContext({ storageState: 'state.json' });
+})
+
+test('Client App', async () => {
+    const page = await webContext.newPage();
+    await page.goto("https://rahulshettyacademy.com/client");
+    const productName = "ADIDAS ORIGINAL";
+    const products = page.locator(".card-body");
+    const email = "thai@gmail.com";
     const titles = await page.locator(".card-body b").allTextContents();
     console.log(titles);
     const count = await products.count();
@@ -49,11 +61,9 @@ test('Client App', async ({ page }) => {
     await page.locator("tbody").waitFor();
     const allOrders = await page.locator("tbody tr");
     const ordersCount = await allOrders.count();
-    for(let i=0;i<ordersCount;++i)
-    {
+    for (let i = 0; i < ordersCount; ++i) {
         const historyOrderId = await allOrders.locator("th").nth(i).textContent();
-        if(historyOrderId===orderId)
-        {
+        if (historyOrderId === orderId) {
             await allOrders.nth(i).locator("button").first().click();
             break;
         }
@@ -61,4 +71,14 @@ test('Client App', async ({ page }) => {
     const orderIdDetails = await page.locator(".col-text").textContent();
     expect(orderId.includes(orderIdDetails)).toBeTruthy();
 
+})
+
+test('Test case 2', async () => {
+    const page = await webContext.newPage();
+    await page.goto("https://rahulshettyacademy.com/client");
+    const productName = "ADIDAS ORIGINAL";
+    const products = page.locator(".card-body");
+    const email = "thai@gmail.com";
+    const titles = await page.locator(".card-body b").allTextContents();
+    console.log(titles);
 })
