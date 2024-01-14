@@ -1,7 +1,7 @@
 const { test, expect, request } = require('@playwright/test');
 const { ApiUtils } = require('./utils/ApiUtils');
 const loginPayload = { userEmail: "thai@gmail.com", userPassword: "4Youonly4" };
-const orderPayload = { orders: [{ country: "Vietnam", productOrderedId: "6262e990e26b7e1a10e89bfa" }] };
+const orderPayload = { orders: [{ country: "Vietnam", productOrderedId: "6581ca979fd99c85e8ee7faf" }] };
 let response;
 
 test.beforeAll(async () => {
@@ -30,7 +30,7 @@ test('API login bypass', async ({ page }) => {
         }
     }
     const orderIdDetails = await page.locator("div .col-text").textContent();
-    await page.pause();
+    // await page.pause();
     expect(response.orderId.includes(orderIdDetails)).toBeTruthy();
 
 })
