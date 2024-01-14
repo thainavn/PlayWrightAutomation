@@ -1,13 +1,15 @@
-const {test, expect} = require('@playwright/test');
+const { test, expect } = require('@playwright/test');
 
 
-test('Browser Context Playwright test', async ({browser})=>
-{
+test.only('Browser Context Playwright test', async ({ browser }) => {
      const context = await browser.newContext();
      const page = await context.newPage();
+     page.route('**/*.{jpg,png,jpeg}', route => route.abort())
      const userName = page.locator('#username');
      const signIn = page.locator('#signInBtn');
      const cardTitles = page.locator(".card-body a");
+     page.on('request', request => console.log(request.url()));
+     page.on('response',response => console.log(response.url(), response.status()));
      await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
      console.log(await page.title());
      await userName.fill("rahulshetty");
@@ -28,8 +30,7 @@ test('Browser Context Playwright test', async ({browser})=>
 });
 
 
-test('UI Controls', async ({page})=>
-{
+test('UI Controls', async ({ page }) => {
      await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
      const userName = page.locator('#username');
      const signIn = page.locator('#signInBtn');
@@ -44,28 +45,27 @@ test('UI Controls', async ({page})=>
      await expect(page.locator('#terms')).toBeChecked();
      await page.locator('#terms').uncheck();
      expect(await page.locator('#terms').isChecked()).toBeFalsy();
-     await expect(documentLink).toHaveAttribute("class","blinkingText");
+     await expect(documentLink).toHaveAttribute("class", "blinkingText");
      // await page.pause();
 });
 
-test('Child windows handle', async ({browser})=>
-{
+test('Child windows handle', async ({ browser }) => {
      const context = await browser.newContext();
      const page = await context.newPage();
      const userName = page.locator('#username');
      await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
      const documentLink = page.locator("[href*='documents-request']");
      const [newPage] = await Promise.all(
-     [
-     context.waitForEvent('page'),
-     documentLink.click()
-     ])
+          [
+               context.waitForEvent('page'),
+               documentLink.click()
+          ])
      const text = await newPage.locator("[class='im-para red']").textContent();
      const arrayText = text.split("@");
      const domain = arrayText[1].split(" ")[0];
      console.log(domain);
      await userName.fill(domain);
-     await page.pause();
+     // await page.pause();
      console.log(await userName.textContent());
      // nnn
 })
