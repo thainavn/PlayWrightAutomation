@@ -1,58 +1,37 @@
 const { test, expect } = require('@playwright/test');
-const { LoginPage } = require('../pageobjects/LoginPage');
-const { DashboardPage } = require('../pageobjects/DashboardPage');
+const { POManager } = require('../pageobjects/POManager');
 
 test('Client App', async ({ page }) => {
+    const poManager = new POManager(page);
     const productName = "ADIDAS ORIGINAL";
+    const country = "India";
+    const name = "Ngo Anh Thai";
+    const coupon = "rahulshettyacademy";
+    const applyCouponSuccessMsg = "Coupon Applied";
     const products = page.locator(".card-body");
     const email = "thai@gmail.com";
     const password = "4Youonly4";
-    const loginPage = new LoginPage(page);
+    const loginPage = poManager.getLoginPage();
     await loginPage.goTo();
     await loginPage.validLogin(email, password);
-    const dashboardPage = new DashboardPage(page);
+    const dashboardPage = poManager.getDashboardPage();
     await dashboardPage.searchProductAddCart(productName);
     await dashboardPage.navigateToCart();
-
-
-
-    await page.locator("div li").first().waitFor();
-    const bool = await page.locator("h3:has-text('adidas original')").isVisible();
-    expect(bool).toBeTruthy();
-    await page.locator("text=Checkout").click();
-    await page.locator("[placeholder*='Country']").pressSequentially("ind");
-    const dropdown = await page.locator(".ta-results");
-    await dropdown.waitFor();
-    const optionsCount = await dropdown.locator("button").count();
-    for (let i = 0; i < optionsCount; ++i) {
-        const text = await dropdown.locator("button").nth(i).textContent();
-        if (text.trim() === "India") {
-            await dropdown.locator("button").nth(i).click();
-            break;
-        }
-    }
-    expect(page.locator(".user__name [type='text']").first()).toHaveText(email);
-    await page.locator("[class='input txt']").nth(1).fill("Ngo Anh Thai");
-    await page.locator("[name='coupon']").fill("rahulshettyacademy");
-    await page.locator("[type='submit']").click();
-    await expect(page.locator("[name='coupon']+p")).toContainText("Coupon Applied");
-    await page.locator(".action__submit").click();
-    const text = await page.locator("label[class='ng-star-inserted']").textContent();
-    const arrayText = text.split("| ");
-    const orderId = arrayText[1].split(" ")[0];
-    console.log(orderId);
-    await page.locator("label[routerlink='/dashboard/myorders']").click();
-    await page.locator("tbody").waitFor();
-    const allOrders = await page.locator("tbody tr");
-    const ordersCount = await allOrders.count();
-    for (let i = 0; i < ordersCount; ++i) {
-        const historyOrderId = await allOrders.locator("th").nth(i).textContent();
-        if (historyOrderId === orderId) {
-            await allOrders.nth(i).locator("button").first().click();
-            break;
-        }
-    }
-    const orderIdDetails = await page.locator(".col-text").textContent();
-    expect(orderId.includes(orderIdDetails)).toBeTruthy();
-
+    const cartPage = poManager.getCartPage();
+    await cartPage.verifyProductInCart(productName);
+    await cartPage.proceedToCheckout();
+    const checkoutPage = poManager.getCheckoutPage();
+    await checkoutPage.selectCountry(country);
+    await checkoutPage.verifyEmail(email);
+    await checkoutPage.inputNameCard(name);
+    await checkoutPage.inputCoupon(coupon);
+    await checkoutPage.clickApplyCoupon();
+    await checkoutPage.verifyApplyCouponMsg(applyCouponSuccessMsg);
+    await checkoutPage.clickPlaceOrder();
+    const thankyouPage = poManager.getThankyouPage();
+    const orderId = await thankyouPage.getOrderId();
+    await thankyouPage.proceedToOrdersHistoryPage();
+    const ordersHistoryPage = poManager.getOrdersHistoryPage();
+    await ordersHistoryPage.openTheLatestOrder(orderId);
+    expect(orderId.includes(await ordersHistoryPage.getOrderId())).toBeTruthy;
 })

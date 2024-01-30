@@ -6,8 +6,6 @@ class DashboardPage {
         this.cart = page.locator("[routerlink*='cart']");
     }
     async searchProductAddCart(productName) {
-        const titles = await this.productsText.allTextContents();
-        console.log(titles);
         const count = await this.products.count();
         for (let i = 0; i < count; i++) {
             if (await this.products.nth(i).locator("b").textContent() === productName) {
