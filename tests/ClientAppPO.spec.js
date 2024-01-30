@@ -1,37 +1,44 @@
 const { test, expect } = require('@playwright/test');
+const { customtest } = require('../utils/test-base')
 const { POManager } = require('../pageobjects/POManager');
-
-test('Client App', async ({ page }) => {
+const dataset = JSON.parse(JSON.stringify(require("../utils/placeorderTestData.json")));
+for (const data of dataset) {
+    test(`Client App PO for ${data.product_name}`, async ({ page }) => {
+        const poManager = new POManager(page);
+        const loginPage = poManager.getLoginPage();
+        await loginPage.goTo();
+        await loginPage.validLogin(data.username, data.password);
+        const dashboardPage = poManager.getDashboardPage();
+        await dashboardPage.searchProductAddCart(data.product_name);
+        await dashboardPage.navigateToCart();
+        const cartPage = poManager.getCartPage();
+        await cartPage.verifyProductInCart(data.product_name);
+        await cartPage.proceedToCheckout();
+        const checkoutPage = poManager.getCheckoutPage();
+        await checkoutPage.selectCountry(data.country);
+        await checkoutPage.verifyEmail(data.username);
+        await checkoutPage.inputNameCard(data.name);
+        await checkoutPage.inputCoupon(data.coupon);
+        await checkoutPage.clickApplyCoupon();
+        await checkoutPage.verifyApplyCouponMsg(data.coupon_success_msg);
+        await checkoutPage.clickPlaceOrder();
+        const thankyouPage = poManager.getThankyouPage();
+        const orderId = await thankyouPage.getOrderId();
+        await thankyouPage.proceedToOrdersHistoryPage();
+        const ordersHistoryPage = poManager.getOrdersHistoryPage();
+        await ordersHistoryPage.openTheLatestOrder(orderId);
+        expect(orderId.includes(await ordersHistoryPage.getOrderId())).toBeTruthy;
+    });
+}
+customtest(`Client App PO`, async ({ page, testDataForOrder }) => {
     const poManager = new POManager(page);
-    const productName = "ADIDAS ORIGINAL";
-    const country = "India";
-    const name = "Ngo Anh Thai";
-    const coupon = "rahulshettyacademy";
-    const applyCouponSuccessMsg = "Coupon Applied";
-    const products = page.locator(".card-body");
-    const email = "thai@gmail.com";
-    const password = "4Youonly4";
     const loginPage = poManager.getLoginPage();
     await loginPage.goTo();
-    await loginPage.validLogin(email, password);
+    await loginPage.validLogin(testDataForOrder.username, testDataForOrder.password);
     const dashboardPage = poManager.getDashboardPage();
-    await dashboardPage.searchProductAddCart(productName);
+    await dashboardPage.searchProductAddCart(testDataForOrder.product_name);
     await dashboardPage.navigateToCart();
     const cartPage = poManager.getCartPage();
-    await cartPage.verifyProductInCart(productName);
+    await cartPage.verifyProductInCart(testDataForOrder.product_name);
     await cartPage.proceedToCheckout();
-    const checkoutPage = poManager.getCheckoutPage();
-    await checkoutPage.selectCountry(country);
-    await checkoutPage.verifyEmail(email);
-    await checkoutPage.inputNameCard(name);
-    await checkoutPage.inputCoupon(coupon);
-    await checkoutPage.clickApplyCoupon();
-    await checkoutPage.verifyApplyCouponMsg(applyCouponSuccessMsg);
-    await checkoutPage.clickPlaceOrder();
-    const thankyouPage = poManager.getThankyouPage();
-    const orderId = await thankyouPage.getOrderId();
-    await thankyouPage.proceedToOrdersHistoryPage();
-    const ordersHistoryPage = poManager.getOrdersHistoryPage();
-    await ordersHistoryPage.openTheLatestOrder(orderId);
-    expect(orderId.includes(await ordersHistoryPage.getOrderId())).toBeTruthy;
 })

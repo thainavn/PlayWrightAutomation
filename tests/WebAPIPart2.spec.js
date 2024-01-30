@@ -16,7 +16,7 @@ test.beforeAll(async ({ browser }) => {
     webContext = await browser.newContext({ storageState: 'state.json' });
 })
 
-test('Client App', async () => {
+test('Client App API', async () => {
     const page = await webContext.newPage();
     await page.goto("https://rahulshettyacademy.com/client");
     const productName = "ADIDAS ORIGINAL";

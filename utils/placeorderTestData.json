@@ -1,0 +1,20 @@
+[
+    {
+        "username": "thai@gmail.com",
+        "password": "4Youonly4",
+        "product_name": "ADIDAS ORIGINAL",
+        "country": "India",
+        "name": "Ngo Anh Thai",
+        "coupon": "rahulshettyacademy",
+        "coupon_success_msg": "Coupon Applied"
+    },
+    {
+        "username": "thai1@gmail.com",
+        "password": "4Youonly4",
+        "product_name": "ZARA COAT 3",
+        "country": "Vietnam",
+        "name": "Le Thi Van Anh",
+        "coupon": "rahulshettyacademy",
+        "coupon_success_msg": "Coupon Applied"
+    }
+]
