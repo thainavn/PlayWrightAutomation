@@ -13,9 +13,10 @@ const config = {
       name: 'safari',
       use: {
         browserName: 'webkit',
-        headless: true,
+        headless: false,
         screenshot: 'off',
-        trace: 'on'
+        trace: 'on',
+        ...devices['iPhone 11']
       }
     },
     {
@@ -24,13 +25,18 @@ const config = {
         browserName: 'chromium',
         headless: false,
         screenshot: 'on',
-        trace: 'on'
+        trace: 'on',
+        ignoreHttpsErrors: true,
+        permissions: ['geolocation'],
+        video: 'retain-on-failure',
+        // ...devices['Galaxy S9+']
+        viewport: {
+          width: 720,
+          height: 720
+        }
       }
     }
-  ],
-  contextOptions: {
-    viewport: null
-  }
+  ]
 };
 module.exports = config;
 
