@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 
 
-test('Browser Context Playwright test', async ({ browser }) => {
+test('@Web Browser Context Playwright test', async ({ browser }) => {
      const context = await browser.newContext();
      const page = await context.newPage();
      page.route('**/*.{jpg,png,jpeg}', route => route.abort())
@@ -30,7 +30,7 @@ test('Browser Context Playwright test', async ({ browser }) => {
 });
 
 
-test('UI Controls', async ({ page }) => {
+test('@Web UI Controls', async ({ page }) => {
      await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
      const userName = page.locator('#username');
      const signIn = page.locator('#signInBtn');

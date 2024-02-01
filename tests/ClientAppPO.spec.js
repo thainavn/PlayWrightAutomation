@@ -3,7 +3,7 @@ const { customtest } = require('../utils/test-base')
 const { POManager } = require('../pageobjects/POManager');
 const dataset = JSON.parse(JSON.stringify(require("../utils/placeorderTestData.json")));
 for (const data of dataset) {
-    test(`Client App PO for ${data.product_name}`, async ({ page }) => {
+    test(`@Web Client App PO for ${data.product_name}`, async ({ page }) => {
         const poManager = new POManager(page);
         const loginPage = poManager.getLoginPage();
         await loginPage.goTo();

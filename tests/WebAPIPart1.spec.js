@@ -11,7 +11,7 @@ test.beforeAll(async () => {
 });
 
 
-test('API login bypass', async ({ page }) => {
+test('@API API login bypass', async ({ page }) => {
     await page.addInitScript(value => {
         window.localStorage.setItem('token', value);
 

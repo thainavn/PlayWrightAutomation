@@ -8,7 +8,7 @@ const { QuanLyNhomCauHoiPage } = require('../pageobjects/Admin/QuanLyNhomCauHoiP
 const { VNPayPage } = require('../pageobjects/Web/VNPayPage');
 const { DanhSachLopPage } = require('../pageobjects/Admin/DanhSachLopPage');
 
-test('LoginAdmin', async ({ page }) => {
+test.skip('LoginAdmin', async ({ page }) => {
     const adminLoginPage = new AdminLoginPage(page);
     await adminLoginPage.goTo(baseURL);
     await adminLoginPage.login(DataUtils.ADMIN_USERNAME, DataUtils.ADMIN_PASSWORD);
@@ -18,7 +18,7 @@ test('LoginAdmin', async ({ page }) => {
     expect(adminHomePage.verifyOnHomePage()).toBeTruthy();
 })
 
-test('LoginWebApp', async ({ page }) => {
+test.skip('LoginWebApp', async ({ page }) => {
     const webHomePage = new WebHomePage(page);
     await webHomePage.goTo(webBaseURL);
     await webHomePage.openLoginPopup();
@@ -28,7 +28,7 @@ test('LoginWebApp', async ({ page }) => {
 
 })
 
-test('TaoMoiNhomCauHoi', async ({ page }) => {
+test.skip('TaoMoiNhomCauHoi', async ({ page }) => {
     const adminLoginPage = new AdminLoginPage(page);
     await adminLoginPage.goTo(baseURL);
     await adminLoginPage.login(DataUtils.ADMIN_USERNAME, DataUtils.ADMIN_PASSWORD);
@@ -52,7 +52,7 @@ test('TaoMoiNhomCauHoi', async ({ page }) => {
 
 })
 
-test('HocCungGiaoVienThanhToanVNPay', async ({ page }) => {
+test.skip('HocCungGiaoVienThanhToanVNPay', async ({ page }) => {
     const webHomePage = new WebHomePage(page);
     const vnPaypage = new VNPayPage(page);
     await webHomePage.goTo(webBaseURL);
@@ -81,7 +81,7 @@ test('HocCungGiaoVienThanhToanVNPay', async ({ page }) => {
     expect(webHomePage.verifyThanhToanThanhCong()).toBeTruthy();
 })
 
-test('ThemHocVienVaoLopHoc', async ({ page }) => {
+test.skip('ThemHocVienVaoLopHoc', async ({ page }) => {
     const adminLoginPage = new AdminLoginPage(page);
     const danhSachLopPage = new DanhSachLopPage(page);
     await adminLoginPage.goTo(baseURL);

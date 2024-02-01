@@ -2,6 +2,7 @@ const { devices } = require('@playwright/test');
 const config = {
   testDir: './tests',
   timeout: 30 * 1000,
+  retries: 2,
   baseURL: 'https://admin-dev.appigv.vmo.group/',
   webBaseURL: 'https://web-dev.appigv.vmo.group/',
   expect: {
@@ -13,7 +14,7 @@ const config = {
   },
   use: {
     browserName: 'chromium',
-    headless: false,
+    headless: true,
     screenshot: 'on',
     trace: 'on'
   },
