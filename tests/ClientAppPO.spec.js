@@ -30,7 +30,7 @@ for (const data of dataset) {
         expect(orderId.includes(await ordersHistoryPage.getOrderId())).toBeTruthy;
     });
 }
-customtest.only(`Client App PO`, async ({ page, testDataForOrder }) => {
+customtest(`Client App PO`, async ({ page, testDataForOrder }) => {
     const poManager = new POManager(page);
     const loginPage = poManager.getLoginPage();
     await loginPage.goTo();

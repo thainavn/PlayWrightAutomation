@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-const { DataUtils } = require('./utils/DataUtils');
+const { DataUtils } = require('../utils/DataUtils');
 const { baseURL, webBaseURL } = require('../playwright.config');
 const { AdminLoginPage } = require('../pageobjects/Admin/AdminLoginPage');
 const { AdminHomePage } = require('../pageobjects/Admin/AdminHomePage');

@@ -1,6 +1,8 @@
 const { devices } = require('@playwright/test');
 const config = {
   testDir: './tests',
+  retries: 1,
+  workers: 3,
   timeout: 30 * 1000,
   baseURL: 'https://admin-dev.appigv.vmo.group/',
   webBaseURL: 'https://web-dev.appigv.vmo.group/',
@@ -30,10 +32,10 @@ const config = {
         permissions: ['geolocation'],
         video: 'retain-on-failure',
         // ...devices['Galaxy S9+']
-        viewport: {
-          width: 720,
-          height: 720
-        }
+        // viewport: {
+        //   width: 720,
+        //   height: 720
+        // }
       }
     }
   ]
