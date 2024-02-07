@@ -1,5 +1,9 @@
 const { expect } = require('@playwright/test');
-class CheckoutPage {
+exports.CheckoutPage = class CheckoutPage {
+    /** 
+     * 
+     * @param {import ('@playwright/test').Page} page 
+     */
     constructor(page) {
         this.page = page;
         this.selectCountryField = page.locator("[placeholder*='Country']");
@@ -42,4 +46,3 @@ class CheckoutPage {
         await this.placeOrderBtn.click();
     }
 }
-module.exports = { CheckoutPage };

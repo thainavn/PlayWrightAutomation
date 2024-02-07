@@ -1,4 +1,8 @@
-class DashboardPage {
+exports.DashboardPage = class DashboardPage {
+    /** 
+     * 
+     * @param {import ('@playwright/test').Page} page 
+     */
     constructor(page) {
         this.page = page;
         this.products = page.locator(".card-body");
@@ -16,9 +20,8 @@ class DashboardPage {
             }
         }
     }
-    async navigateToCart(){
+    async navigateToCart() {
         await this.cart.click();
         await this.page.locator("div li").first().waitFor();
     }
 }
-module.exports = { DashboardPage };

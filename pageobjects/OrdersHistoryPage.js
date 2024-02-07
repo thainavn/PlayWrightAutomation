@@ -1,5 +1,9 @@
 const { expect } = require('@playwright/test');
-class OrdersHistoryPage {
+exports.OrdersHistoryPage = class OrdersHistoryPage {
+    /** 
+     * 
+     * @param {import ('@playwright/test').Page} page 
+     */
     constructor(page) {
         this.page = page;
         this.allOrders = page.locator("tbody tr");
@@ -20,4 +24,3 @@ class OrdersHistoryPage {
         return orderIdDetails;
     }
 }
-module.exports = { OrdersHistoryPage };

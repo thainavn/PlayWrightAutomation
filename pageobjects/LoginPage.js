@@ -1,4 +1,8 @@
-class LoginPage {
+exports.LoginPage = class LoginPage {
+    /** 
+     * 
+     * @param {import ('@playwright/test').Page} page 
+     */
     constructor(page) {
         this.page = page;
         this.signInBtn = page.locator("[type='submit']");
@@ -12,8 +16,7 @@ class LoginPage {
         await this.signInBtn.click();
         await this.page.locator(".card-body b").first().waitFor();
     }
-    async goTo(){
+    async goTo() {
         await this.page.goto("https://rahulshettyacademy.com/client");
     }
 }
-module.exports = {LoginPage};

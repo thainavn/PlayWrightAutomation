@@ -1,4 +1,8 @@
-class ThankyouPage {
+exports.ThankyouPage = class ThankyouPage {
+    /** 
+     * 
+     * @param {import ('@playwright/test').Page} page 
+     */
     constructor(page) {
         this.page = page;
         this.orderIDText = page.locator("label[class='ng-star-inserted']");
@@ -15,4 +19,3 @@ class ThankyouPage {
         await this.page.locator("tbody").waitFor();
     }
 }
-module.exports = { ThankyouPage };

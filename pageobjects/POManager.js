@@ -5,7 +5,11 @@ const { LoginPage } = require("./LoginPage");
 const { OrdersHistoryPage } = require("./OrdersHistoryPage");
 const { ThankyouPage } = require("./ThankyouPage");
 
-class POManager{
+exports.POManager = class POManager{
+    /** 
+     * 
+     * @param {import ('@playwright/test').Page} page 
+     */
     constructor(page){
         this.page = page;
         this.loginPage = new LoginPage(this.page);
@@ -34,4 +38,3 @@ class POManager{
         return this.ordersHistory;
     }
 }
-module.exports = {POManager};
