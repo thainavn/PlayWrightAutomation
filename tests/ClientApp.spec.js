@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-test.skip('Client App', async ({ page }) => {
+test('Client App', async ({ page }) => {
     const productName = "ADIDAS ORIGINAL";
     const products = page.locator(".card-body");
     const email = "thai@gmail.com";
