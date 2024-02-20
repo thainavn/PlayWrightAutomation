@@ -17,4 +17,4 @@ class AdminLoginPage {
         await this.page.waitForLoadState('networkidle');
     }
 }
-module.exports = {AdminLoginPage};
+export default {AdminLoginPage};

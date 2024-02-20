@@ -1,12 +1,12 @@
 const { test, expect } = require('@playwright/test');
 const { DataUtils } = require('../utils/DataUtils');
 const { baseURL, webBaseURL } = require('../playwright.config');
-const { AdminLoginPage } = require('../pageobjects/Admin/AdminLoginPage');
-const { AdminHomePage } = require('../pageobjects/Admin/AdminHomePage');
-const { WebHomePage } = require('../pageobjects/Web/WebHomePage');
-const { QuanLyNhomCauHoiPage } = require('../pageobjects/Admin/QuanLyNhomCauHoiPage');
-const { VNPayPage } = require('../pageobjects/Web/VNPayPage');
-const { DanhSachLopPage } = require('../pageobjects/Admin/DanhSachLopPage');
+const { AdminLoginPage } = require('../pageobjects/Admin/AdminLoginPage').default;
+const { AdminHomePage } = require('../pageobjects/Admin/AdminHomePage').default;
+const { WebHomePage } = require('../pageobjects/Web/WebHomePage').default;
+const { QuanLyNhomCauHoiPage } = require('../pageobjects/Admin/QuanLyNhomCauHoiPage').default;
+const { VNPayPage } = require('../pageobjects/Web/VNPayPage').default;
+const { DanhSachLopPage } = require('../pageobjects/Admin/DanhSachLopPage').default;
 
 test.skip('LoginAdmin', async ({ page }) => {
     const adminLoginPage = new AdminLoginPage(page);

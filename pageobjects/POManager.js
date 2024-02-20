@@ -1,11 +1,11 @@
-const { CartPage } = require("./CartPage");
-const { CheckoutPage } = require("./CheckoutPage");
-const { DashboardPage } = require("./DashboardPage");
-const { LoginPage } = require("./LoginPage");
-const { OrdersHistoryPage } = require("./OrdersHistoryPage");
-const { ThankyouPage } = require("./ThankyouPage");
+import { CartPage } from "./CartPage";
+import { CheckoutPage } from "./CheckoutPage";
+import { DashboardPage } from "./DashboardPage";
+import { LoginPage } from "./LoginPage";
+import { OrdersHistoryPage } from "./OrdersHistoryPage";
+import { ThankyouPage } from "./ThankyouPage";
 
-exports.POManager = class POManager{
+export class POManager{
     /** 
      * 
      * @param {import ('@playwright/test').Page} page 

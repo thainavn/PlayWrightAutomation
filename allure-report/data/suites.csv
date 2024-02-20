@@ -1,0 +1,6 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Tue Feb 20 09:21:08 ICT 2024","Tue Feb 20 09:21:30 ICT 2024","21691","","MoreValidations.spec.js","","","","@Web Popup validations",""
+"passed","Tue Feb 20 09:21:08 ICT 2024","Tue Feb 20 09:21:35 ICT 2024","26660","","ClientAppPO.spec.js","","","","@Web Client App PO for ADIDAS ORIGINAL",""
+"passed","Tue Feb 20 09:21:35 ICT 2024","Tue Feb 20 09:21:46 ICT 2024","11381","","ClientAppPO.spec.js","","","","@Web Client App PO for ZARA COAT 3",""
+"passed","Tue Feb 20 09:21:08 ICT 2024","Tue Feb 20 09:21:29 ICT 2024","21048","","UIBasicstest.spec.js","","","","@Web Browser Context Playwright test",""
+"passed","Tue Feb 20 09:21:29 ICT 2024","Tue Feb 20 09:21:34 ICT 2024","4398","","UIBasicstest.spec.js","","","","@Web UI Controls",""

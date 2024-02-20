@@ -42,4 +42,4 @@ class QuanLyNhomCauHoiPage {
         await this.page.waitForTimeout(1000);
     }
 }
-module.exports = { QuanLyNhomCauHoiPage };
+export default { QuanLyNhomCauHoiPage };

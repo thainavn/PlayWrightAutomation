@@ -68,4 +68,4 @@ class WebHomePage {
     }
 
 }
-module.exports = { WebHomePage };
+export default { WebHomePage };

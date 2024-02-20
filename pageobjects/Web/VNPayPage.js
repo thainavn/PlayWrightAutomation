@@ -44,4 +44,4 @@ class VNPayPage {
     }
 
 }
-module.exports = { VNPayPage };
+export default { VNPayPage };

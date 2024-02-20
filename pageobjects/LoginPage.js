@@ -1,4 +1,4 @@
-exports.LoginPage = class LoginPage {
+export class LoginPage {
     /** 
      * 
      * @param {import ('@playwright/test').Page} page 

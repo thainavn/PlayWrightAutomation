@@ -15,7 +15,7 @@ const config = {
       name: 'safari',
       use: {
         browserName: 'webkit',
-        headless: false,
+        headless: true,
         screenshot: 'off',
         trace: 'on',
         ...devices['iPhone 11']

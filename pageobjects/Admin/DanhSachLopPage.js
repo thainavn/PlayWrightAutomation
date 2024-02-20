@@ -39,4 +39,4 @@ class DanhSachLopPage {
         await this.themHocVienThanhCongPopup.isVisible();
     }
 }
-module.exports = { DanhSachLopPage };
+export default { DanhSachLopPage };

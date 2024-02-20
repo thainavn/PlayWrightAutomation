@@ -28,4 +28,4 @@ class AdminHomePage {
     }
     
 }
-module.exports = { AdminHomePage };
+export default { AdminHomePage };
