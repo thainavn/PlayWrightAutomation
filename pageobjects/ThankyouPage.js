@@ -1,4 +1,4 @@
-export class ThankyouPage {
+exports.ThankyouPage = class ThankyouPage {
     /** 
      * 
      * @param {import ('@playwright/test').Page} page 
@@ -14,7 +14,7 @@ export class ThankyouPage {
         const orderId = await arrayText[1].split(" ")[0];
         return orderId;
     }
-    async proceedToOrdersHistoryPage(){
+    async proceedToOrdersHistoryPage() {
         await this.ordersHitoryBtn.click();
         await this.page.locator("tbody").waitFor();
     }

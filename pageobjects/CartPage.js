@@ -1,5 +1,5 @@
-import { expect } from '@playwright/test';
-export class CartPage {
+const { expect } = require('@playwright/test');
+exports.CartPage = class CartPage {
     /** 
      * 
      * @param {import ('@playwright/test').Page} page 

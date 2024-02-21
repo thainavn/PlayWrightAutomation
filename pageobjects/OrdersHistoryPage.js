@@ -1,4 +1,4 @@
-export class OrdersHistoryPage {
+exports.OrdersHistoryPage = class OrdersHistoryPage {
     /** 
      * 
      * @param {import ('@playwright/test').Page} page 

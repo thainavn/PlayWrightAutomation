@@ -1,16 +1,16 @@
-import { CartPage } from "./CartPage";
-import { CheckoutPage } from "./CheckoutPage";
-import { DashboardPage } from "./DashboardPage";
-import { LoginPage } from "./LoginPage";
-import { OrdersHistoryPage } from "./OrdersHistoryPage";
-import { ThankyouPage } from "./ThankyouPage";
+const { CartPage } = require("./CartPage");
+const { CheckoutPage } = require("./CheckoutPage");
+const { DashboardPage } = require("./DashboardPage");
+const { LoginPage } = require("./LoginPage");
+const { OrdersHistoryPage } = require("./OrdersHistoryPage");
+const { ThankyouPage } = require("./ThankyouPage");
 
-export class POManager{
+exports.POManager = class POManager {
     /** 
      * 
      * @param {import ('@playwright/test').Page} page 
      */
-    constructor(page){
+    constructor(page) {
         this.page = page;
         this.loginPage = new LoginPage(this.page);
         this.dashboardPage = new DashboardPage(this.page);
@@ -19,22 +19,22 @@ export class POManager{
         this.thankyouPage = new ThankyouPage(this.page);
         this.ordersHistory = new OrdersHistoryPage(this.page);
     }
-    getLoginPage(){
+    getLoginPage() {
         return this.loginPage;
     }
-    getDashboardPage(){
+    getDashboardPage() {
         return this.dashboardPage;
     }
-    getCartPage(){
+    getCartPage() {
         return this.cartPage;
     }
-    getCheckoutPage(){
+    getCheckoutPage() {
         return this.checkoutPage;
     }
-    getThankyouPage(){
+    getThankyouPage() {
         return this.thankyouPage;
     }
-    getOrdersHistoryPage(){
+    getOrdersHistoryPage() {
         return this.ordersHistory;
     }
 }

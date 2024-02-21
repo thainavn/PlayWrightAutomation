@@ -1,4 +1,4 @@
-export class DashboardPage {
+exports.DashboardPage = class DashboardPage {
     /** 
      * 
      * @param {import ('@playwright/test').Page} page 
