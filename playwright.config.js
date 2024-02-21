@@ -2,7 +2,7 @@ const { devices } = require('@playwright/test');
 const config = {
   testDir: './tests',
   timeout: 30 * 1000,
-  retries: 2,
+  retries: 0,
   baseURL: 'https://admin-dev.appigv.vmo.group/',
   webBaseURL: 'https://web-dev.appigv.vmo.group/',
   expect: {
