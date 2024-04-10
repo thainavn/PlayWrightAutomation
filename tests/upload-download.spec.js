@@ -37,11 +37,11 @@ test('Upload download excel validation', async ({ page }) => {
         page.waitForEvent('download'),
         page.getByRole("button", { name: 'Download' }).click()
     ]);
-    const downloadPath = path.resolve(__dirname, 'C:/Users/Ngo Anh Thai/Downloads/', 'download.xlsx');
+    const downloadPath = path.resolve(__dirname, 'C:/Users/ngoan/Downloads/', 'download.xlsx');
     await download.saveAs(downloadPath);
-    await writeExcelTest(textSearch, updateValue, { rowChange: 0, colChange: 2 }, "C:/Users/Ngo Anh Thai/Downloads/download.xlsx");
+    await writeExcelTest(textSearch, updateValue, { rowChange: 0, colChange: 2 }, "C:/Users/ngoan/Downloads/download.xlsx");
     await page.locator("#fileinput").click();
-    await page.locator("#fileinput").setInputFiles("C:/Users/Ngo Anh Thai/Downloads/download.xlsx");
+    await page.locator("#fileinput").setInputFiles("C:/Users/ngoan/Downloads/download.xlsx");
     const textLocator = page.getByText(textSearch);
     const desiredRow = page.getByRole('row').filter({has:textLocator});
     await expect(desiredRow.locator("#cell-4-undefined")).toContainText(updateValue);
